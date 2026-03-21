@@ -233,8 +233,15 @@ body {
   font-size: 1.75rem;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   color: var(--text-primary);
+}
+
+.booking-subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+  margin-bottom: 32px;
 }
 
 .booking-embed {
