@@ -328,7 +328,7 @@ body {
 }
 
 .folder-card:hover .folder-content-wrapper {
-  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.04) 0%, transparent 60%);
+  background: transparent;
   z-index: 20;
 }
 
