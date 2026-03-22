@@ -83,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const logo = getFolderLogo(folder);
       folderCard.innerHTML = `
         <div class="window-glass"></div>
-        <div class="window-reflection"></div>
         <div class="window-mullion-v"></div>
         <div class="window-mullion-h"></div>
         <div class="folder-content-wrapper">

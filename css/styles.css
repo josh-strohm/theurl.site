@@ -295,29 +295,7 @@ body {
   box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
 }
 
-.window-reflection {
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0) 40%,
-    rgba(255, 255, 255, 0.05) 45%,
-    rgba(255, 255, 255, 0.02) 50%,
-    rgba(255, 255, 255, 0.1) 55%,
-    rgba(255, 255, 255, 0) 60%
-  );
-  transform: translateY(100%);
-  transition: transform 0.8s ease-in-out;
-  pointer-events: none;
-  z-index: 5;
-}
 
-.folder-card:hover .window-reflection {
-  transform: translateY(-100%);
-}
 
 .folder-card:hover {
   transform: translateY(-5px);
