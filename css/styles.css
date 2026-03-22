@@ -197,14 +197,15 @@ body {
 
 .folders-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(3, minmax(180px, 220px));
+  justify-content: center;
+  gap: 32px;
   animation: fadeInUp 0.8s ease-out 0.2s both;
 }
 
 @media (max-width: 900px) {
   .folders-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(180px, 220px));
   }
 }
 
@@ -364,8 +365,8 @@ body {
 }
 
 .folder-icon {
-  width: 60px;
-  height: 60px;
+  width: 96px;
+  height: 96px;
   margin: 0 auto 12px;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
