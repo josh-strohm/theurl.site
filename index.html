@@ -107,8 +107,7 @@
           top: 0; left: 0; 
           transform-origin: left; 
           transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.1); 
-          box-shadow: inset 5px 0 15px rgba(255,255,255,0.1),
-                      inset -5px 0 10px rgba(0,0,0,0.3);
+          box-shadow: inset -5px 0 10px rgba(0,0,0,0.3);
           display: flex;
           flex-direction: column;
           padding: 20px;
@@ -117,10 +116,9 @@
           z-index: 2;
         }
         .door-wrapper:hover .door-panel {
-          transform: rotateY(-105deg);
-          box-shadow: inset 5px 0 15px rgba(255,255,255,0.1),
-                      inset -5px 0 15px rgba(0,0,0,0.5),
-                      15px 10px 30px rgba(0,0,0,1);
+          transform: rotateY(-60deg);
+          box-shadow: inset -5px 0 15px rgba(0,0,0,0.5),
+                      10px 5px 20px rgba(0,0,0,0.7);
         }
         .door-panel::before {
           content: '';
@@ -137,11 +135,11 @@
           opacity: 1;
         }
         .door-orange {
-          background: linear-gradient(180deg, #ef4444 0%, #ea580c 40%, #c2410c 100%);
+          background: #ea580c;
           border-right: 2px solid #9a3412;
         }
         .door-cyan {
-          background: linear-gradient(180deg, #22d3ee 0%, #0891b2 40%, #164e63 100%);
+          background: #0891b2;
           border-right: 2px solid #0e7490;
         }
         .door-inset {
@@ -149,8 +147,6 @@
           flex: 1;
           border-radius: 2px;
           box-shadow: inset 2px 2px 5px rgba(0,0,0,0.3), 
-                      inset -2px -2px 5px rgba(255,255,255,0.15),
-                      0 1px 1px rgba(255,255,255,0.15),
                       0 -1px 1px rgba(0,0,0,0.2);
           border: 1px solid rgba(0,0,0,0.2);
         }
