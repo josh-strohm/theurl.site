@@ -82,25 +82,31 @@ document.addEventListener('DOMContentLoaded', () => {
       folderCard.style.animationDelay = `${index * 0.1}s`;
       const logo = getFolderLogo(folder);
       folderCard.innerHTML = `
-        <div class="folder-icon">
-          ${logo 
-            ? `<img src="${logo}" alt="${escapeHtml(folder.name)}" class="folder-logo-img" />`
-            : `<svg viewBox="0 0 80 80" fill="none">
-                <defs>
-                  <linearGradient id="folderGrad${index}" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#f97316"/>
-                    <stop offset="100%" stop-color="#22d3ee"/>
-                  </linearGradient>
-                </defs>
-                <path d="M10 20C10 16.6863 12.6863 14 16 14H30L38 22H64C67.3137 22 70 24.6863 70 28V60C70 63.3137 67.3137 66 64 66H16C12.6863 66 10 63.3137 10 60V20Z" 
-                      fill="url(#folderGrad${index})" opacity="0.2" stroke="url(#folderGrad${index})" stroke-width="2"/>
-                <path d="M32 14V10C32 7.79086 33.7909 6 36 6H60C62.2091 6 64 7.79086 64 10V14" 
-                      stroke="url(#folderGrad${index})" stroke-width="2" stroke-linecap="round"/>
-               </svg>`
-          }
+        <div class="window-glass"></div>
+        <div class="window-reflection"></div>
+        <div class="window-mullion-v"></div>
+        <div class="window-mullion-h"></div>
+        <div class="folder-content-wrapper">
+          <div class="folder-icon">
+            ${logo 
+              ? `<img src="${logo}" alt="${escapeHtml(folder.name)}" class="folder-logo-img" />`
+              : `<svg viewBox="0 0 80 80" fill="none">
+                  <defs>
+                    <linearGradient id="folderGrad${index}" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#f97316"/>
+                      <stop offset="100%" stop-color="#22d3ee"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M10 20C10 16.6863 12.6863 14 16 14H30L38 22H64C67.3137 22 70 24.6863 70 28V60C70 63.3137 67.3137 66 64 66H16C12.6863 66 10 63.3137 10 60V20Z" 
+                        fill="url(#folderGrad${index})" opacity="0.2" stroke="url(#folderGrad${index})" stroke-width="2"/>
+                  <path d="M32 14V10C32 7.79086 33.7909 6 36 6H60C62.2091 6 64 7.79086 64 10V14" 
+                        stroke="url(#folderGrad${index})" stroke-width="2" stroke-linecap="round"/>
+                 </svg>`
+            }
+          </div>
+          <div class="folder-name">${escapeHtml(folder.name)}</div>
+          <div class="folder-count">${folder.links.length} link${folder.links.length !== 1 ? 's' : ''}</div>
         </div>
-        <div class="folder-name">${escapeHtml(folder.name)}</div>
-        <div class="folder-count">${folder.links.length} link${folder.links.length !== 1 ? 's' : ''}</div>
       `;
       folderCard.addEventListener('click', () => openFolder(folder));
       foldersGrid.appendChild(folderCard);
