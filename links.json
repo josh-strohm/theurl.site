@@ -1,0 +1,9 @@
+{
+  "redirects": {
+    "/book": "https://calendly.com/joshstrohm",
+    "/linkedin": "https://linkedin.com/in/joshstrohm",
+    "/twitter": "https://twitter.com/joshstrohm",
+    "/github": "https://github.com/joshstrohm",
+    "/blog": "https://joshstrohm.com"
+  }
+}

@@ -1,0 +1,9 @@
+# Netlify redirects configuration
+# Short links for Josh Strohm digital business card
+
+/book https://calendly.com/joshstrohm 301
+/linkedin https://linkedin.com/in/joshstrohm 301
+/twitter https://twitter.com/joshstrohm 301
+/github https://github.com/joshstrohm 301
+/blog https://joshstrohm.com 301
+/email mailto:josh@joshstrohm.com 301
