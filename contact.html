@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Josh Strohm</title>
+  <meta name="description" content="Get in touch with Josh Strohm.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="joshstrohm.jpg" type="image/jpeg">
+  <meta property="og:image" content="https://theurl.site/joshstrohm.jpg">
+  <meta name="twitter:image" content="https://theurl.site/joshstrohm.jpg">
+
+  <style>
+    .contact-wrapper {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+    .contact-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .contact-header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .contact-header p {
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+    }
+    .contact-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 24px;
+      transition: color 0.2s ease;
+    }
+    .contact-back:hover {
+      color: var(--text);
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-group label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 12px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 0.9375rem;
+      transition: border-color 0.2s ease;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--border-light);
+    }
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    .form-group select {
+      cursor: pointer;
+    }
+    .form-submit {
+      margin-top: 8px;
+      padding: 14px 24px;
+      background: var(--text);
+      color: var(--bg);
+      border: none;
+      border-radius: 8px;
+      font-family: var(--font);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+    .form-submit:hover {
+      opacity: 0.9;
+    }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .form-success.show {
+      display: block;
+    }
+    .form-success h2 {
+      font-size: 1.125rem;
+      margin-bottom: 8px;
+    }
+    .form-success p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="contact-wrapper">
+    <a href="josh-strohm.html" class="contact-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Back to profile
+    </a>
+
+    <div class="contact-header">
+      <h1>Get in Touch</h1>
+      <p>Fill out the form below and I'll get back to you</p>
+    </div>
+
+    <form class="contact-form" id="contactForm">
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required placeholder="John Doe">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required placeholder="john@example.com">
+      </div>
+
+      <div class="form-group">
+        <label for="company">Company (optional)</label>
+        <input type="text" id="company" name="company" placeholder="Your company name">
+      </div>
+
+      <div class="form-group">
+        <label for="message">How can I help?</label>
+        <textarea id="message" name="message" required placeholder="Tell me about your project or questions..."></textarea>
+      </div>
+
+      <button type="submit" class="form-submit">Send Message</button>
+    </form>
+
+    <div class="form-success" id="formSuccess">
+      <h2>Message Sent!</h2>
+      <p>Thanks for reaching out. I'll get back to you soon.</p>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
+      
+      console.log('Form submitted:', data);
+      
+      this.style.display = 'none';
+      document.getElementById('formSuccess').classList.add('show');
+    });
+  </script>
+</body>
+</html>
