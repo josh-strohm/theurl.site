@@ -86,29 +86,11 @@
       <a href="mailto:hi@joshstrohm.me">hi@joshstrohm.me</a>
     </div>
 
-    <footer class="footer">
+<footer class="footer">
       <p>&copy; 2026 Josh Strohm. All rights reserved.</p>
     </footer>
   </main>
 
-  <script>
-    const redirects = {
-      '/book': '/calendar',
-      '/linkedin': 'https://www.linkedin.com/in/joshua-w-strohm/',
-      '/twitter': 'https://x.com/joshwstrohm',
-      '/github': 'https://github.com/josh-strohm',
-      '/blog': 'https://automatewithjosh.com/blog',
-      '/email': 'mailto:hi@joshstrohm.me'
-    };
-
-    const path = window.location.pathname;
-    if (redirects[path]) {
-      window.location.href = redirects[path];
-    }
-
-    if (Object.keys(redirects).includes(path) || path === '/') {
-      fetch('/links.json').catch(() => {});
-    }
-  </script>
+  <iframe src="https://n8n.srv945929.hstgr.cloud/webhook/600617eb-7e53-4546-83e2-88a3f7af7ac1/chat" style="position: fixed; bottom: 20px; right: 20px; width: 350px; height: 500px; border: none; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 1000;" allow="clipboard-write"></iframe>
 </body>
 </html>
