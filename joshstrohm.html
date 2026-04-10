@@ -92,14 +92,11 @@
   </main>
 
   <div class="chat-widget">
-    <button class="chat-toggle" id="chatToggle">
+    <a href="/chat" class="chat-toggle" id="chatToggle">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
       </svg>
-    </button>
-    <div class="chat-window" id="chatWindow">
-      <iframe src="https://n8n.srv945929.hstgr.cloud/webhook/600617eb-7e53-4546-83e2-88a3f7af7ac1/chat" style="width: 100%; height: 100%; border: none; filter: invert(1) hue-rotate(180deg);"></iframe>
-    </div>
+    </a>
   </div>
 
   <style>
@@ -126,29 +123,7 @@
     .chat-toggle:hover {
       transform: scale(1.05);
     }
-    .chat-window {
-      display: none;
-      position: absolute;
-      bottom: 70px;
-      right: 0;
-      width: 350px;
-      height: 500px;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      background: var(--bg-card);
-    }
-    .chat-window.open {
-      display: block;
-    }
   </style>
 
-  <script>
-    const chatToggle = document.getElementById('chatToggle');
-    const chatWindow = document.getElementById('chatWindow');
-    chatToggle.addEventListener('click', () => {
-      chatWindow.classList.toggle('open');
-    });
-  </script>
 </body>
 </html>
