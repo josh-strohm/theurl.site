@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat — Josh Strohm</title>
+  <meta name="description" content="Chat with Josh Strohm's AI assistant.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="joshstrohm.jpg" type="image/jpeg">
+  <meta property="og:image" content="https://theurl.site/joshstrohm.jpg">
+  <meta name="twitter:image" content="https://theurl.site/joshstrohm.jpg">
+
+  <style>
+    .chat-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 24px;
+      height: calc(100vh - 120px);
+      display: flex;
+      flex-direction: column;
+    }
+    .chat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .chat-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+    .chat-back:hover {
+      color: var(--text);
+    }
+    .chat-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+    }
+    .chat-clear {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: color 0.2s ease;
+    }
+    .chat-clear:hover {
+      color: var(--text);
+    }
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 16px 0;
+    }
+    .message {
+      max-width: 80%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+    }
+    .message.user {
+      align-self: flex-end;
+      background: var(--text);
+      color: var(--bg);
+    }
+    .message.ai {
+      align-self: flex-start;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+    }
+    .message.loading {
+      align-self: flex-start;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .chat-input-wrapper {
+      display: flex;
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .chat-input {
+      flex: 1;
+      padding: 14px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 0.9375rem;
+      resize: none;
+      min-height: 48px;
+      max-height: 120px;
+    }
+    .chat-input:focus {
+      outline: none;
+      border-color: var(--border-light);
+    }
+    .chat-submit {
+      padding: 14px 20px;
+      background: var(--text);
+      color: var(--bg);
+      border: none;
+      border-radius: 12px;
+      font-family: var(--font);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+    .chat-submit:hover {
+      opacity: 0.9;
+    }
+    .chat-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <main class="chat-wrapper">
+    <div class="chat-header">
+      <a href="josh-strohm.html" class="chat-back">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Back
+      </a>
+      <span class="chat-title">Chat</span>
+      <button class="chat-clear" id="clearChat">Clear</button>
+    </div>
+
+    <div class="chat-messages" id="chatMessages"></div>
+
+    <div class="chat-input-wrapper">
+      <textarea class="chat-input" id="chatInput" placeholder="Type your message..." rows="1"></textarea>
+      <button class="chat-submit" id="chatSubmit">Send</button>
+    </div>
+  </main>
+
+  <script>
+    const WEBHOOK_URL = 'https://n8n.srv945929.hstgr.cloud/webhook/600617eb-7e53-4546-83e2-88a3f7af7ac1/chat';
+    const STORAGE_KEY = 'chat_history';
+    const messagesContainer = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const chatSubmit = document.getElementById('chatSubmit');
+    const clearBtn = document.getElementById('clearChat');
+
+    function loadMessages() {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      return stored ? JSON.parse(stored) : [];
+    }
+
+    function saveMessages(messages) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+    }
+
+    function addMessage(content, type) {
+      const messages = loadMessages();
+      messages.push({ content, type, timestamp: Date.now() });
+      saveMessages(messages);
+      renderMessages();
+    }
+
+    function renderMessages() {
+      const messages = loadMessages();
+      messagesContainer.innerHTML = '';
+      
+      messages.forEach(msg => {
+        const div = document.createElement('div');
+        div.className = `message ${msg.type}`;
+        div.textContent = msg.content;
+        messagesContainer.appendChild(div);
+      });
+      
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    async function sendMessage() {
+      const content = chatInput.value.trim();
+      if (!content) return;
+
+      chatInput.value = '';
+      addMessage(content, 'user');
+      chatSubmit.disabled = true;
+
+      const loadingMsg = { content: 'Thinking...', type: 'loading' };
+      const messages = loadMessages();
+      messages.push(loadingMsg);
+      renderMessages();
+
+      try {
+        const response = await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ message: content, history: loadMessages().filter(m => m.type !== 'loading') })
+        });
+
+        const data = await response.json();
+        
+        const messagesAfterLoad = loadMessages();
+        const loadingIndex = messagesAfterLoad.findIndex(m => m.type === 'loading');
+        if (loadingIndex > -1) {
+          messagesAfterLoad[loadingIndex] = { content: data.response || 'Got your message!', type: 'ai', timestamp: Date.now() };
+          saveMessages(messagesAfterLoad);
+        }
+      } catch (error) {
+        const messagesAfterLoad = loadMessages();
+        const loadingIndex = messagesAfterLoad.findIndex(m => m.type === 'loading');
+        if (loadingIndex > -1) {
+          messagesAfterLoad[loadingIndex] = { content: 'Sorry, something went wrong. Please try again.', type: 'ai', timestamp: Date.now() };
+          saveMessages(messagesAfterLoad);
+        }
+      }
+
+      renderMessages();
+      chatSubmit.disabled = false;
+      chatInput.focus();
+    }
+
+    chatSubmit.addEventListener('click', sendMessage);
+    
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    chatInput.addEventListener('input', function() {
+      this.style.height = 'auto';
+      this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+    });
+
+    clearBtn.addEventListener('click', () => {
+      localStorage.removeItem(STORAGE_KEY);
+      renderMessages();
+    });
+
+    if (loadMessages().length === 0) {
+      addMessage('Hi! How can I help you today?', 'ai');
+    } else {
+      renderMessages();
+    }
+  </script>
+</body>
+</html>
