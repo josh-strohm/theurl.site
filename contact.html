@@ -61,8 +61,7 @@
       color: var(--text);
     }
     .form-group input,
-    .form-group textarea,
-    .form-group select {
+    .form-group textarea {
       padding: 12px 14px;
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -73,17 +72,13 @@
       transition: border-color 0.2s ease;
     }
     .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
+    .form-group textarea:focus {
       outline: none;
       border-color: var(--border-light);
     }
     .form-group textarea {
       min-height: 100px;
       resize: vertical;
-    }
-    .form-group select {
-      cursor: pointer;
     }
     .form-submit {
       margin-top: 8px;
@@ -101,25 +96,6 @@
     .form-submit:hover {
       opacity: 0.9;
     }
-    .form-success {
-      display: none;
-      text-align: center;
-      padding: 24px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-    }
-    .form-success.show {
-      display: block;
-    }
-    .form-success h2 {
-      font-size: 1.125rem;
-      margin-bottom: 8px;
-    }
-    .form-success p {
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-    }
   </style>
 </head>
 <body>
@@ -136,7 +112,7 @@
       <p>Fill out the form below and I'll get back to you</p>
     </div>
 
-    <form class="contact-form" id="contactForm">
+    <form class="contact-form" id="contactForm" action="https://n8n.srv945929.hstgr.cloud/webhook/32999750-7113-4bad-a029-598167b0b831" method="POST">
       <div class="form-group">
         <label for="name">Your Name</label>
         <input type="text" id="name" name="name" required placeholder="John Doe">
@@ -148,8 +124,8 @@
       </div>
 
       <div class="form-group">
-        <label for="company">Company (optional)</label>
-        <input type="text" id="company" name="company" placeholder="Your company name">
+        <label for="phone">Phone Number (optional)</label>
+        <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
       </div>
 
       <div class="form-group">
@@ -159,25 +135,6 @@
 
       <button type="submit" class="form-submit">Send Message</button>
     </form>
-
-    <div class="form-success" id="formSuccess">
-      <h2>Message Sent!</h2>
-      <p>Thanks for reaching out. I'll get back to you soon.</p>
-    </div>
   </main>
-
-  <script>
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const formData = new FormData(this);
-      const data = Object.fromEntries(formData.entries());
-      
-      console.log('Form submitted:', data);
-      
-      this.style.display = 'none';
-      document.getElementById('formSuccess').classList.add('show');
-    });
-  </script>
 </body>
 </html>
