@@ -91,41 +91,13 @@
     </footer>
   </main>
 
-  <div class="chat-widget">
-    <a href="/chat" class="chat-toggle" id="chatToggle">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-      </svg>
-    </a>
-  </div>
-
-  <style>
-    .chat-widget {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1000;
-    }
-    .chat-toggle {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: var(--text);
-      color: var(--bg);
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      transition: transform 0.2s ease;
-      text-decoration: none;
-    }
-    .chat-toggle:hover {
-      transform: scale(1.05);
-    }
-  </style>
-
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+    createChat({
+      webhookUrl: 'https://n8n.srv945929.hstgr.cloud/webhook/600617eb-7e53-4546-83e2-88a3f7af7ac1/chat'
+    });
+  </script>
 </body>
 
   <script>
