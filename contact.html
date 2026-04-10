@@ -112,7 +112,7 @@
       <p>Fill out the form below and I'll get back to you</p>
     </div>
 
-    <form class="contact-form" id="contactForm" action="https://n8n.srv945929.hstgr.cloud/webhook/32999750-7113-4bad-a029-598167b0b831" method="POST">
+    <form class="contact-form" id="contactForm">
       <div class="form-group">
         <label for="name">Your Name</label>
         <input type="text" id="name" name="name" required placeholder="John Doe">
@@ -136,5 +136,29 @@
       <button type="submit" class="form-submit">Send Message</button>
     </form>
   </main>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
+      
+      try {
+        await fetch('https://n8n.srv945929.hstgr.cloud/webhook/32999750-7113-4bad-a029-598167b0b831', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+        
+        window.location.href = 'contact-success.html';
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Something went wrong. Please try again.');
+      }
+    });
+  </script>
 </body>
 </html>
