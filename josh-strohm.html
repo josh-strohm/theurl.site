@@ -71,11 +71,11 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0v-8l8 4-8 4zm8-4V6l-8 4 8 4z"/></svg>
           <span>Blog</span>
         </a>
-        <a href="/calendar" class="link-item">
+        <a href="calendar.html" class="link-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           <span>Book a call</span>
         </a>
-        <a href="/contact" class="link-item">
+        <a href="contact.html" class="link-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           <span>Contact</span>
         </a>
@@ -92,44 +92,112 @@
   </main>
 
   <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+  <style>
+    :root {
+      --chat--color--primary: #22d3ee;
+      --chat--color--primary-shade-50: #67e8f9;
+      --chat--color--primary--shade-100: #06b6d4;
+      --chat--color--secondary: #f97316;
+      --chat--color--white: #1e1e2e;
+      --chat--color--light: #1e1e2e;
+      --chat--color--light-shade-50: #2a2a3a;
+      --chat--color--light-shade-100: #333340;
+      --chat--color--medium: #2a2a3a;
+      --chat--color--dark: #0a0a0a;
+      --chat--color--typing: #333333;
+      --chat--toggle--background: #22d3ee;
+      --chat--toggle--hover--background: #67e8f9;
+      --chat--toggle--active--background: #06b6d4;
+      --chat--toggle--color: #0a0a0a;
+      --chat--header--background: #0a0a0a;
+      --chat--header--color: #ffffff;
+      --chat--body--background: #141414;
+      --chat--footer--background: #141414;
+      --chat--footer--color: #f8fafc;
+      --chat--input--background: #1e1e2e;
+      --chat--input--text-color: #f8fafc;
+      --chat--input--border: #2a2a3a;
+      --chat--message--bot--background: #1e1e2e;
+      --chat--message--bot--color: #f8fafc;
+      --chat--message--user--background: #22d3ee;
+      --chat--message--user--color: #0a0a0a;
+      --chat--input--send--button--background: #22d3ee;
+      --chat--input--send--button--color: #0a0a0a;
+      --chat--input--send--button--background-hover: #67e8f9;
+      --chat--input--file--button--background: #1e1e2e;
+      --chat--input--file--button--color: #f8fafc;
+      --chat--button--background--primary: #22d3ee;
+      --chat--button--color--primary: #0a0a0a;
+      --chat--window--border: 1px solid #2a2a3a;
+      --chat--border-radius: 12px;
+    }
+  </style>
+  <style>
+    /* Toggle button - cyan */
+    button[class*="toggle"],
+    div[class*="toggle"] button,
+    [class*="chat-toggle"] button,
+    #n8n-chat > div > button,
+    .n8n-chat-toggle {
+      background-color: #22d3ee !important;
+    }
+    /* Chat window - dark */
+    #n8n-chat .chat-window,
+    #n8n-chat .chat-body,
+    #n8n-chat .chat-footer,
+    #n8n-chat .chat-header,
+    #n8n-chat .chat-messages,
+    .chat-window,
+    .chat-body,
+    .chat-footer,
+    .chat-header,
+    .chat-messages {
+      background-color: #141414 !important;
+      color: #f8fafc !important;
+    }
+    /* Nested elements */
+    .chat-window div,
+    .chat-window span,
+    .chat-window p,
+    .chat-body div,
+    .chat-messages div {
+      background-color: inherit !important;
+    }
+    /* Input area */
+    .chat-input,
+    [class*="input"],
+    [class*="textarea"] {
+      background-color: #1e1e2e !important;
+      color: #f8fafc !important;
+    }
+  </style>
   <script type="module">
     import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
     createChat({
       webhookUrl: 'https://n8n.srv945929.hstgr.cloud/webhook/600617eb-7e53-4546-83e2-88a3f7af7ac1/chat',
-      primaryColor: '#f97316',
-      theme: {
-        chatWindow: {
-          backgroundColor: '#0a0a0a',
-          textColor: '#fafafa',
-          title: 'Chat with Josh',
-          welcomeMessage: 'Hi! I\'m Josh\'s AI assistant. How can I help you today?',
-          errorMessage: 'Sorry, something went wrong. Please try again.',
-          textInput: {
-            backgroundColor: '#1a1a1a',
-            textColor: '#fafafa',
-            placeholder: 'Type your message...'
-          }
+      initialMessages: [
+        'Hi there! 👋',
+        'How can I help you today?'
+      ],
+      i18n: {
+        en: {
+          title: 'Hi there! 👋',
+          subtitle: "Start a chat. We're here to help.",
+          footer: '',
+          getStarted: 'New Conversation',
+          inputPlaceholder: 'Type your message...',
         },
-        userMessage: {
-          backgroundColor: '#f97316',
-          textColor: '#0a0a0a'
-        },
-        assistantMessage: {
-          backgroundColor: '#1a1a1a',
-          textColor: '#fafafa'
-        },
-        button: {
-          backgroundColor: '#f97316',
-          iconColor: '#0a0a0a'
-        }
-      }
+      },
     });
   </script>
 </body>
 
   <script>
     const redirects = {
-      '/book': '/calendar',
+      '/calendar': 'calendar.html',
+      '/contact': 'contact.html',
+      '/book': 'https://calendly.com/joshstrohm',
       '/linkedin': 'https://www.linkedin.com/in/joshua-w-strohm/',
       '/twitter': 'https://x.com/joshwstrohm',
       '/github': 'https://github.com/josh-strohm',

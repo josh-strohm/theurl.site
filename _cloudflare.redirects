@@ -1,9 +1,11 @@
 # Cloudflare Pages redirects configuration
 # Short links for Josh Strohm digital business card
 
+/calendar /calendar.html 200
+/contact /contact.html 200
 /book https://calendly.com/joshstrohm 301
 /linkedin https://linkedin.com/in/joshstrohm 301
 /twitter https://twitter.com/joshstrohm 301
-/github https://github.com/joshstrohm 301
+/github https://github.com/josh-strohm 301
 /blog https://joshstrohm.com 301
 /email mailto:josh@joshstrohm.com 301
