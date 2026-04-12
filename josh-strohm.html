@@ -95,7 +95,34 @@
   <script type="module">
     import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
     createChat({
-      webhookUrl: 'https://n8n.srv945929.hstgr.cloud/webhook/600617eb-7e53-4546-83e2-88a3f7af7ac1/chat'
+      webhookUrl: 'https://n8n.srv945929.hstgr.cloud/webhook/600617eb-7e53-4546-83e2-88a3f7af7ac1/chat',
+      primaryColor: '#f97316',
+      theme: {
+        chatWindow: {
+          backgroundColor: '#0a0a0a',
+          textColor: '#fafafa',
+          title: 'Chat with Josh',
+          welcomeMessage: 'Hi! I\'m Josh\'s AI assistant. How can I help you today?',
+          errorMessage: 'Sorry, something went wrong. Please try again.',
+          textInput: {
+            backgroundColor: '#1a1a1a',
+            textColor: '#fafafa',
+            placeholder: 'Type your message...'
+          }
+        },
+        userMessage: {
+          backgroundColor: '#f97316',
+          textColor: '#0a0a0a'
+        },
+        assistantMessage: {
+          backgroundColor: '#1a1a1a',
+          textColor: '#fafafa'
+        },
+        button: {
+          backgroundColor: '#f97316',
+          iconColor: '#0a0a0a'
+        }
+      }
     });
   </script>
 </body>
