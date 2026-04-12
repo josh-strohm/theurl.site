@@ -104,7 +104,7 @@
       --chat--color--light-shade-100: #333340;
       --chat--color--medium: #2a2a3a;
       --chat--color--dark: #0a0a0a;
-      --chat--color--typing: #333333;
+      --chat--color--typing: #67e8f9;
       --chat--toggle--background: #22d3ee;
       --chat--toggle--hover--background: #67e8f9;
       --chat--toggle--active--background: #06b6d4;
@@ -163,12 +163,36 @@
     .chat-messages div {
       background-color: inherit !important;
     }
+    /* User message text - dark on cyan */
+    .chat-message[class*="user"],
+    [class*="user-message"],
+    [class*="chat-user"],
+    [class*="message-user"] {
+      background-color: #22d3ee !important;
+      color: #0a0a0a !important;
+    }
+    .chat-message[class*="user"] span,
+    .chat-message[class*="user"] p,
+    [class*="user-message"] span,
+    [class*="user-message"] p {
+      color: #0a0a0a !important;
+    }
     /* Input area */
     .chat-input,
     [class*="input"],
     [class*="textarea"] {
       background-color: #1e1e2e !important;
       color: #f8fafc !important;
+    }
+    /* Typing indicator */
+    [class*="typing"],
+    [class*="typing-indicator"],
+    [class*="typing-dots"] {
+      background-color: #1e1e2e !important;
+    }
+    [class*="typing"] span,
+    [class*="typing-indicator"] span {
+      background-color: #67e8f9 !important;
     }
   </style>
   <script type="module">
@@ -177,13 +201,12 @@
     createChat({
       webhookUrl: 'https://n8n.srv945929.hstgr.cloud/webhook/600617eb-7e53-4546-83e2-88a3f7af7ac1/chat',
       initialMessages: [
-        'Hi there! 👋',
-        'How can I help you today?'
+        "Hi, I'm Josh's AI assistant. How can I help you?"
       ],
       i18n: {
         en: {
-          title: 'Hi there! 👋',
-          subtitle: "Start a chat. We're here to help.",
+          title: "Josh's AI Assistant",
+          subtitle: "Always ready to help!",
           footer: '',
           getStarted: 'New Conversation',
           inputPlaceholder: 'Type your message...',
