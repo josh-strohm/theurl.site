@@ -183,9 +183,20 @@ body {
   font-weight: 500;
   color: var(--text);
   margin-top: 4px;
+  text-decoration: none;
 }
 
-.brand-card:hover .brand-btn {
+.brand-btn:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.brand-name a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.brand-name a:hover {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
