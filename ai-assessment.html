@@ -13,89 +13,38 @@
   <meta property="og:image" content="https://theurl.site/joshstrohm.jpg">
   <meta name="twitter:image" content="https://theurl.site/joshstrohm.jpg">
   <style>
-    .form-page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    .form-header {
-      text-align: center;
-      padding: 48px 24px 32px;
-      animation: fadeIn 0.6s ease-out;
+    html, body {
+      height: 100%;
+      overflow: hidden;
     }
-    .form-header h1 {
-      font-size: 1.75rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: 12px;
+    .form-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #000;
     }
-    .form-header p {
-      font-size: 1rem;
-      color: var(--text-secondary);
-      max-width: 480px;
-      margin: 0 auto;
-    }
-    .form-container {
-      flex: 1;
+    .form-frame {
+      position: fixed;
+      inset: 0;
       width: 100%;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 0 24px 48px;
-      animation: fadeInUp 0.6s ease-out 0.1s both;
-    }
-    .tally-embed {
-      width: 100%;
-      height: calc(100vh - 200px);
-      min-height: 600px;
-      border: none;
-      border-radius: 12px;
-      background: var(--bg-elevated);
-    }
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.875rem;
-      padding: 24px;
-      transition: color 0.2s ease;
-    }
-    .back-link:hover {
-      color: var(--text);
-    }
-    .back-link svg {
-      width: 16px;
-      height: 16px;
+      height: 100%;
+      border: 0;
+      overflow: hidden;
     }
   </style>
 </head>
 <body>
-  <div class="form-page">
-    <header class="form-header">
-      <h1>AI Efficiency Assessment</h1>
-      <p>Evaluate your current capabilities and discover opportunities for AI-driven improvements in your workflows.</p>
-    </header>
-
-    <div class="form-container">
-      <iframe 
-        src="https://tally.so/r/Med68Y?transparentBackground=1" 
-        width="100%" 
-        height="100%" 
-        frameborder="0" 
-        marginheight="0" 
-        marginwidth="0" 
-        title="AI Efficiency Assessment" 
-        class="tally-embed">
-      </iframe>
-    </div>
-
-    <a href="index.html" class="back-link">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M19 12H5M12 19l-7-7 7-7"/>
-      </svg>
-      Back to home
-    </a>
+  <div class="form-overlay">
+    <iframe 
+      src="https://tally.so/r/Med68Y?transparentBackground=1" 
+      class="form-frame" 
+      title="AI Efficiency Assessment">
+    </iframe>
   </div>
 
   <script>
