@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Josh Strohm — Building AI That Works For Your Business</title>
-  <meta name="description" content="Founder & operator building AI agents and automation systems for small businesses. I run Strohm Media and AutomatewithJosh.com.">
+  <meta name="description" content="Founder & operator building AI agents and automation systems for small businesses. Explore Strohm Partners, Strohm Media, and AutomateWithJosh.com.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -21,38 +21,43 @@
       </div>
       <h1 class="hero-name">Josh Strohm</h1>
       <p class="hero-tagline">Building AI that works for your business</p>
-      <p class="hero-bio">Founder & operator building AI agents and automation systems for small businesses. I run Strohm Media and AutomatewithJosh.com. You can view my professional portfolio at JoshStrohm.me.</p>
+      <p class="hero-bio">Founder & operator building AI agents and automation systems for small businesses. Explore my businesses below or connect with me on social media.</p>
     </section>
 
     <section class="brands">
       <div class="brand-cards">
-        <div class="brand-card">
+        <a href="strohm-partners.html" class="brand-card">
+          <div class="brand-content">
+            <img src="strohmpartners-logo.png" alt="Strohm Partners LLC" class="brand-logo">
+            <h2 class="brand-name">Strohm Partners LLC</h2>
+            <p class="brand-desc">AI consulting and AI services for small businesses. Strategy, implementation, and ongoing support to help you leverage AI effectively.</p>
+            <span class="brand-btn">Learn more</span>
+          </div>
+        </a>
+        <a href="strohm-media.html" class="brand-card">
           <div class="brand-content">
             <img src="strohmmedia.png" alt="Strohm Media" class="brand-logo">
-            <h2 class="brand-name"><a href="https://strohmmedia.com" target="_blank" rel="noopener noreferrer">Strohm Media</a></h2>
+            <h2 class="brand-name">Strohm Media</h2>
             <p class="brand-desc">AI-powered marketing agency. Content strategy, social media, AI-driven campaigns, and brand development for small businesses.</p>
-            <a href="https://strohmmedia.com" class="brand-btn" target="_blank" rel="noopener noreferrer">Grow with AI</a>
+            <span class="brand-btn">Learn more</span>
           </div>
-        </div>
-        <div class="brand-card">
+        </a>
+        <a href="automate-with-josh.html" class="brand-card">
           <div class="brand-content">
             <img src="AutomatewithJosh.png" alt="AutomateWithJosh" class="brand-logo">
-            <h2 class="brand-name"><a href="https://automatewithjosh.com" target="_blank" rel="noopener noreferrer">AutomateWithJosh.com</a></h2>
+            <h2 class="brand-name">AutomateWithJosh.com</h2>
             <p class="brand-desc">AI automation agency. Custom AI agents, workflow automation, business process optimization, and digital worker deployment.</p>
-            <div style="display: flex; gap: 16px; align-items: center;">
-              <a href="https://automatewithjosh.com" class="brand-btn" target="_blank" rel="noopener noreferrer">Automate your business</a>
-              <a href="https://joshstrohm.me/blog" class="brand-btn" target="_blank" rel="noopener noreferrer">Read the blog</a>
-            </div>
+            <span class="brand-btn">Learn more</span>
           </div>
-        </div>
-        <div class="brand-card">
+        </a>
+        <a href="josh-strohm.html" class="brand-card">
           <div class="brand-content">
             <img src="joshstrohm.jpg" alt="Josh Strohm" class="brand-logo">
-            <h2 class="brand-name"><a href="https://joshstrohm.me" target="_blank" rel="noopener noreferrer">JoshStrohm.me</a></h2>
+            <h2 class="brand-name">JoshStrohm.me</h2>
             <p class="brand-desc">Personal portfolio detailing my current projects, skills, and past work across various industries.</p>
-            <a href="https://joshstrohm.me" class="brand-btn" target="_blank" rel="noopener noreferrer">View portfolio</a>
+            <span class="brand-btn">Learn more</span>
           </div>
-        </div>
+        </a>
       </div>
     </section>
 
@@ -136,7 +141,6 @@
     }
   </style>
   <style>
-    /* Toggle button - cyan */
     button[class*="toggle"],
     div[class*="toggle"] button,
     [class*="chat-toggle"] button,
@@ -144,7 +148,6 @@
     .n8n-chat-toggle {
       background-color: #22d3ee !important;
     }
-    /* Chat window - dark */
     #n8n-chat .chat-window,
     #n8n-chat .chat-body,
     #n8n-chat .chat-footer,
@@ -158,7 +161,6 @@
       background-color: #141414 !important;
       color: #f8fafc !important;
     }
-    /* Nested elements */
     .chat-window div,
     .chat-window span,
     .chat-window p,
@@ -166,7 +168,6 @@
     .chat-messages div {
       background-color: inherit !important;
     }
-    /* User message text - dark on cyan */
     .chat-message[class*="user"],
     [class*="user-message"],
     [class*="chat-user"],
@@ -180,14 +181,12 @@
     [class*="user-message"] p {
       color: #0a0a0a !important;
     }
-    /* Input area */
     .chat-input,
     [class*="input"],
     [class*="textarea"] {
       background-color: #1e1e2e !important;
       color: #f8fafc !important;
     }
-    /* Typing indicator */
     [class*="typing"],
     [class*="typing-indicator"],
     [class*="typing-dots"] {

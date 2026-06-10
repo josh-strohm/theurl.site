@@ -238,6 +238,21 @@ body {
   flex-shrink: 0;
 }
 
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  color: #ffffff;
+  text-decoration: none;
+  margin-bottom: 32px;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: #ffffff;
+}
+
 .footer {
   text-align: center;
   padding: 24px 0;
