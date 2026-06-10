@@ -13,48 +13,887 @@
   <meta property="og:image" content="https://theurl.site/joshstrohm.jpg">
   <meta name="twitter:image" content="https://theurl.site/joshstrohm.jpg">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    .assessment-wrapper {
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 40px 24px;
     }
-    html, body {
-      height: 100%;
-      overflow: hidden;
+    .assessment-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 24px;
+      transition: color 0.2s ease;
     }
-    .form-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: #000;
+    .assessment-back:hover {
+      color: #ffffff;
     }
-    .form-frame {
-      position: fixed;
-      inset: 0;
+    .assessment-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .assessment-header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .assessment-header p {
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+    }
+    .progress-container {
+      margin-bottom: 32px;
+    }
+    .progress-text {
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .progress-bar {
       width: 100%;
-      height: 100%;
-      border: 0;
+      height: 4px;
+      background: var(--border);
+      border-radius: 4px;
       overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: #ffffff;
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+    .step {
+      display: none;
+    }
+    .step.active {
+      display: block;
+    }
+    .step-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 12px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 0.9375rem;
+      transition: border-color 0.2s ease;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--border-light);
+    }
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    .form-group select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+    .form-group select option {
+      background: var(--bg-card);
+      color: var(--text);
+    }
+    .radio-group,
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .radio-label,
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 0.875rem;
+      color: var(--text);
+    }
+    .radio-label input[type="radio"],
+    .checkbox-label input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--text);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .conditional-field {
+      display: none;
+      margin-top: 8px;
+    }
+    .conditional-field.visible {
+      display: flex;
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .btn-back {
+      padding: 14px 24px;
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: var(--font);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+    }
+    .btn-back:hover {
+      border-color: var(--border-light);
+    }
+    .btn-next,
+    .btn-submit {
+      flex: 1;
+      padding: 14px 24px;
+      background: var(--text);
+      color: var(--bg);
+      border: none;
+      border-radius: 8px;
+      font-family: var(--font);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+    .btn-next:hover,
+    .btn-submit:hover {
+      opacity: 0.9;
+    }
+    .btn-next:disabled,
+    .btn-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .error-message {
+      color: #ef4444;
+      font-size: 0.8125rem;
+      margin-top: 4px;
+      display: none;
+    }
+    .form-group.has-error input,
+    .form-group.has-error textarea,
+    .form-group.has-error select {
+      border-color: #ef4444;
+    }
+    .form-group.has-error .error-message {
+      display: block;
+    }
+    .success-state {
+      display: none;
+      text-align: center;
+      padding: 60px 24px;
+    }
+    .success-state.active {
+      display: block;
+    }
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 24px;
+      background: #1a2e1a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .success-icon svg {
+      width: 32px;
+      height: 32px;
+      stroke: #4ade80;
+    }
+    .success-state h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .success-state p {
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .range-container {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .range-container input[type="range"] {
+      flex: 1;
+      height: 4px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: var(--border);
+      border-radius: 4px;
+      outline: none;
+      border: none;
+      padding: 0;
+    }
+    .range-container input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      background: #ffffff;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .range-value {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text);
+      min-width: 32px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <div class="form-overlay">
-    <iframe 
-      src="https://tally.so/r/Med68Y?transparentBackground=1" 
-      class="form-frame" 
-      title="AI Efficiency Assessment">
-    </iframe>
-  </div>
+  <main class="assessment-wrapper">
+    <a href="index.html" class="assessment-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Back to home
+    </a>
+
+    <div class="assessment-header">
+      <h1>AI Efficiency Assessment</h1>
+      <p>Answer a few questions about your business to discover automation opportunities</p>
+    </div>
+
+    <div class="progress-container">
+      <div class="progress-text">Step <span id="currentStep">1</span> of <span id="totalSteps">9</span></div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <form id="assessmentForm">
+
+      <!-- PAGE 1: Business Info -->
+      <div class="step active" data-step="1">
+        <div class="step-title">Business Information</div>
+
+        <div class="form-group">
+          <label for="business_name">Business Name <span style="color: #ef4444;">*</span></label>
+          <input type="text" id="business_name" name="business_name" required placeholder="Your business name">
+          <span class="error-message">Please enter your business name</span>
+        </div>
+
+        <div class="form-group">
+          <label for="first_name">First Name <span style="color: #ef4444;">*</span></label>
+          <input type="text" id="first_name" name="first_name" required placeholder="John">
+          <span class="error-message">Please enter your first name</span>
+        </div>
+
+        <div class="form-group">
+          <label for="last_name">Last Name <span style="color: #ef4444;">*</span></label>
+          <input type="text" id="last_name" name="last_name" required placeholder="Doe">
+          <span class="error-message">Please enter your last name</span>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address <span style="color: #ef4444;">*</span></label>
+          <input type="email" id="email" name="email" required placeholder="john@example.com">
+          <span class="error-message">Please enter a valid email address</span>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+        </div>
+
+        <div class="form-group">
+          <label for="website">Website</label>
+          <input type="url" id="website" name="website" placeholder="https://yourbusiness.com">
+        </div>
+
+        <div class="nav-buttons">
+          <button type="button" class="btn-next" onclick="nextStep()">Continue</button>
+        </div>
+      </div>
+
+      <!-- PAGE 2: Business Overview -->
+      <div class="step" data-step="2">
+        <div class="step-title">Business Overview</div>
+
+        <div class="form-group">
+          <label for="industry_years">What industry is your business in, and how many years have you been in operation? <span style="color: #ef4444;">*</span></label>
+          <textarea id="industry_years" name="industry_years" required placeholder="e.g., Residential plumbing, 12 years in business"></textarea>
+          <span class="error-message">Please answer this question</span>
+        </div>
+
+        <div class="form-group">
+          <label for="team_members">How many team members do you have (including yourself)? <span style="color: #ef4444;">*</span></label>
+          <input type="number" id="team_members" name="team_members" required min="1" placeholder="e.g., 5">
+          <span class="error-message">Please enter a number</span>
+        </div>
+
+        <div class="form-group">
+          <label for="products_services">Briefly describe your main products/services and your primary customer type <span style="color: #ef4444;">*</span></label>
+          <textarea id="products_services" name="products_services" required placeholder="Describe what you offer and who you serve..."></textarea>
+          <span class="error-message">Please answer this question</span>
+        </div>
+
+        <div class="nav-buttons">
+          <button type="button" class="btn-back" onclick="prevStep()">Back</button>
+          <button type="button" class="btn-next" onclick="nextStep()">Continue</button>
+        </div>
+      </div>
+
+      <!-- PAGE 3: Lead Generation -->
+      <div class="step" data-step="3">
+        <div class="step-title">Lead Generation & Marketing</div>
+
+        <div class="form-group">
+          <label>How do most new customers find you? <span style="color: #ef4444;">*</span></label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="customer_acquisition" value="Website/Google Search" required> Website / Google Search</label>
+            <label class="radio-label"><input type="radio" name="customer_acquisition" value="Referrals/Word of Mouth"> Referrals / Word of Mouth</label>
+            <label class="radio-label"><input type="radio" name="customer_acquisition" value="Social Media"> Social Media</label>
+            <label class="radio-label"><input type="radio" name="customer_acquisition" value="Paid Ads"> Paid Ads</label>
+            <label class="radio-label"><input type="radio" name="customer_acquisition" value="Online Directories (Yelp, etc.)"> Online Directories (Yelp, etc.)</label>
+            <label class="radio-label"><input type="radio" name="customer_acquisition" value="other"> Other</label>
+          </div>
+          <div class="conditional-field" data-condition="customer_acquisition" data-value="other">
+            <input type="text" name="customer_acquisition_other" placeholder="Please specify...">
+          </div>
+          <span class="error-message">Please select an option</span>
+        </div>
+
+        <div class="form-group">
+          <label>How is your website currently generating leads? <span style="color: #ef4444;">*</span></label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="website_lead_method" value="Contact Form" required> Contact Form</label>
+            <label class="radio-label"><input type="radio" name="website_lead_method" value="Phone Calls"> Phone Calls</label>
+            <label class="radio-label"><input type="radio" name="website_lead_method" value="Online Booking/Scheduling"> Online Booking / Scheduling</label>
+            <label class="radio-label"><input type="radio" name="website_lead_method" value="It does not generate leads currently"> It does not generate leads currently</label>
+          </div>
+          <span class="error-message">Please select an option</span>
+        </div>
+
+        <div class="form-group">
+          <label for="weekly_leads">How many new lead inquiries per week would you estimate you receive on average? <span style="color: #ef4444;">*</span></label>
+          <input type="number" id="weekly_leads" name="weekly_leads" required min="0" placeholder="e.g., 15">
+          <span class="error-message">Please enter a number</span>
+        </div>
+
+        <div class="form-group">
+          <label for="lead_followup">Who follows up with new leads, and how quickly does that typically happen? <span style="color: #ef4444;">*</span></label>
+          <textarea id="lead_followup" name="lead_followup" required placeholder="e.g., Our office manager follows up within 24 hours..."></textarea>
+          <span class="error-message">Please answer this question</span>
+        </div>
+
+        <div class="form-group">
+          <label for="lead_followup_process">Do you have a process for following up with leads who did not convert on the first contact? If so, describe it.</label>
+          <textarea id="lead_followup_process" name="lead_followup_process" placeholder="Describe your follow-up process, or leave blank if you don't have one..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>How do you handle online reviews and social media currently? <span style="color: #ef4444;">*</span></label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="reviews_social_media" value="Managed manually by someone on our team" required> Managed manually by someone on our team</label>
+            <label class="radio-label"><input type="radio" name="reviews_social_media" value="Outsourced to an agency"> Outsourced to an agency</label>
+            <label class="radio-label"><input type="radio" name="reviews_social_media" value="Scheduled in advance with tools"> Scheduled in advance with tools</label>
+            <label class="radio-label"><input type="radio" name="reviews_social_media" value="Not actively managed"> Not actively managed</label>
+          </div>
+          <span class="error-message">Please select an option</span>
+        </div>
+
+        <div class="form-group">
+          <label>Are you running any paid ads? <span style="color: #ef4444;">*</span></label>
+          <div class="checkbox-group">
+            <label class="checkbox-label"><input type="checkbox" name="paid_ads" value="Facebook"> Facebook</label>
+            <label class="checkbox-label"><input type="checkbox" name="paid_ads" value="Google"> Google</label>
+            <label class="checkbox-label"><input type="checkbox" name="paid_ads" value="YouTube"> YouTube</label>
+            <label class="checkbox-label"><input type="checkbox" name="paid_ads" value="TikTok"> TikTok</label>
+            <label class="checkbox-label"><input type="checkbox" name="paid_ads" value="No Paid Ads" id="noPaidAds"> No Paid Ads</label>
+            <label class="checkbox-label"><input type="checkbox" name="paid_ads" value="Other"> Other</label>
+          </div>
+          <span class="error-message">Please select at least one option</span>
+        </div>
+
+        <div class="conditional-field" id="paidAdsTracking" data-condition-checkbox="paid_ads" data-hide-value="No Paid Ads">
+          <div class="form-group">
+            <label for="paid_ads_tracking">If yes, how do you track which leads come from your ads?</label>
+            <textarea id="paid_ads_tracking" name="paid_ads_tracking" placeholder="Describe how you track ad performance..."></textarea>
+          </div>
+        </div>
+
+        <div class="nav-buttons">
+          <button type="button" class="btn-back" onclick="prevStep()">Back</button>
+          <button type="button" class="btn-next" onclick="nextStep()">Continue</button>
+        </div>
+      </div>
+
+      <!-- PAGE 4: Customer Experience -->
+      <div class="step" data-step="4">
+        <div class="step-title">Customer Experience</div>
+
+        <div class="form-group">
+          <label for="common_question">What is the number one question customers ask you most often? <span style="color: #ef4444;">*</span></label>
+          <textarea id="common_question" name="common_question" required placeholder="e.g., How much does it cost? Do you offer financing?"></textarea>
+          <span class="error-message">Please answer this question</span>
+        </div>
+
+        <div class="form-group">
+          <label>How do customers currently schedule appointments or calls with you? <span style="color: #ef4444;">*</span></label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="scheduling_method" value="Phone Calls" required> Phone Calls</label>
+            <label class="radio-label"><input type="radio" name="scheduling_method" value="Email"> Email</label>
+            <label class="radio-label"><input type="radio" name="scheduling_method" value="Online Booking Tool"> Online Booking Tool</label>
+            <label class="radio-label"><input type="radio" name="scheduling_method" value="A Mix of Above"> A Mix of Above</label>
+          </div>
+          <span class="error-message">Please select an option</span>
+        </div>
+
+        <div class="form-group">
+          <label for="appointment_reminders">Do you send appointment reminders automatically, or does someone handle that manually? <span style="color: #ef4444;">*</span></label>
+          <textarea id="appointment_reminders" name="appointment_reminders" required placeholder="Describe how reminders are handled..."></textarea>
+          <span class="error-message">Please answer this question</span>
+        </div>
+
+        <div class="form-group">
+          <label for="after_hours">How do you handle after-hours customer inquiries? Do customers reach you when you are closed? <span style="color: #ef4444;">*</span></label>
+          <textarea id="after_hours" name="after_hours" required placeholder="Describe what happens when customers reach out after hours..."></textarea>
+          <span class="error-message">Please answer this question</span>
+        </div>
+
+        <div class="form-group">
+          <label>Do you currently use any type of chat on your website? <span style="color: #ef4444;">*</span></label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="website_chat" value="Yes - It answers questions automatically" required> Yes - It answers questions automatically</label>
+            <label class="radio-label"><input type="radio" name="website_chat" value="Yes - It collects contact information"> Yes - It collects contact information</label>
+            <label class="radio-label"><input type="radio" name="website_chat" value="No"> No</label>
+          </div>
+          <span class="error-message">Please select an option</span>
+        </div>
+
+        <div class="form-group">
+          <label for="complaint_handling">Walk me through how you handle customer complaints or special requests from the moment they reach out to when the issue is resolved. <span style="color: #ef4444;">*</span></label>
+          <textarea id="complaint_handling" name="complaint_handling" required placeholder="Describe the full process..."></textarea>
+          <span class="error-message">Please answer this question</span>
+        </div>
+
+        <div class="nav-buttons">
+          <button type="button" class="btn-back" onclick="prevStep()">Back</button>
+          <button type="button" class="btn-next" onclick="nextStep()">Continue</button>
+        </div>
+      </div>
+
+      <!-- PAGE 5: Operations -->
+      <div class="step" data-step="5">
+        <div class="step-title">Business Operations</div>
+
+        <div class="form-group">
+          <label for="admin_tasks">What administrative tasks take up most of your time that are not directly related to serving customers? <span style="color: #ef4444;">*</span></label>
+          <textarea id="admin_tasks" name="admin_tasks" required placeholder="e.g., Scheduling, invoicing, data entry, reporting..."></textarea>
+          <span class="error-message">Please answer this question</span>
+        </div>
+
+        <div class="form-group">
+          <label for="software_tools">What software tools are you currently using to run your business? <span style="color: #ef4444;">*</span></label>
+          <textarea id="software_tools" name="software_tools" required placeholder="e.g., QuickBooks, Google Workspace, CRM, scheduling tools..."></textarea>
+          <span class="error-message">Please answer this question</span>
+        </div>
+
+        <div class="form-group">
+          <label for="underused_tools">Which of those tools do you feel you are not using to their full potential? <span style="color: #ef4444;">*</span></label>
+          <textarea id="underused_tools" name="underused_tools" required placeholder="e.g., We only use QuickBooks for invoicing but not for reporting..."></textarea>
+          <span class="error-message">Please answer this question</span>
+        </div>
+
+        <div class="form-group">
+          <label for="invoicing_process">How do invoices and payments work? Do you send invoices manually, and how do you follow up on overdue payments? <span style="color: #ef4444;">*</span></label>
+          <textarea id="invoicing_process" name="invoicing_process" required placeholder="Describe your invoicing and payment collection process..."></textarea>
+          <span class="error-message">Please answer this question</span>
+        </div>
+
+        <div class="form-group">
+          <label for="document_tracking">How do you track important documents, contracts, client files, and records? Where do they live, and how are they organized? <span style="color: #ef4444;">*</span></label>
+          <textarea id="document_tracking" name="document_tracking" required placeholder="e.g., Google Drive with folders per client, filing cabinet for contracts..."></textarea>
+          <span class="error-message">Please answer this question</span>
+        </div>
+
+        <div class="form-group">
+          <label for="tedious_reports">Are there any reports or numbers you pull together regularly that feel tedious?</label>
+          <textarea id="tedious_reports" name="tedious_reports" placeholder="Describe any reporting tasks that feel tedious..."></textarea>
+        </div>
+
+        <div class="nav-buttons">
+          <button type="button" class="btn-back" onclick="prevStep()">Back</button>
+          <button type="button" class="btn-next" onclick="nextStep()">Continue</button>
+        </div>
+      </div>
+
+      <!-- PAGE 6: Automation & Team -->
+      <div class="step" data-step="6">
+        <div class="step-title">Automation & Team</div>
+
+        <div class="form-group">
+          <label for="repetitive_tasks">Do you or your team spend time on repetitive tasks that feel like they should be automated? Give examples. <span style="color: #ef4444;">*</span></label>
+          <textarea id="repetitive_tasks" name="repetitive_tasks" required placeholder="e.g., Copying data between systems, sending the same emails, manual scheduling..."></textarea>
+          <span class="error-message">Please answer this question</span>
+        </div>
+
+        <div class="form-group">
+          <label for="automate_task">If you could remove or automate one task from your plate permanently, what would it be and why? <span style="color: #ef4444;">*</span></label>
+          <textarea id="automate_task" name="automate_task" required placeholder="Describe the task and why it would make the biggest impact..."></textarea>
+          <span class="error-message">Please answer this question</span>
+        </div>
+
+        <div class="form-group">
+          <label for="employee_onboarding">How do you onboard new employees? Is there a training process, and does it take a lot of your time? <span style="color: #ef4444;">*</span></label>
+          <textarea id="employee_onboarding" name="employee_onboarding" required placeholder="Describe your onboarding and training process..."></textarea>
+          <span class="error-message">Please answer this question</span>
+        </div>
+
+        <div class="form-group">
+          <label>How do you currently communicate with your team? <span style="color: #ef4444;">*</span></label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="team_communication" value="Slack/Microsoft Teams" required> Slack / Microsoft Teams</label>
+            <label class="radio-label"><input type="radio" name="team_communication" value="Email Messages"> Email Messages</label>
+            <label class="radio-label"><input type="radio" name="team_communication" value="Text Messages"> Text Messages</label>
+            <label class="radio-label"><input type="radio" name="team_communication" value="Regular Meetings/Physical Boards"> Regular Meetings / Physical Boards</label>
+            <label class="radio-label"><input type="radio" name="team_communication" value="other"> Other</label>
+          </div>
+          <div class="conditional-field" data-condition="team_communication" data-value="other">
+            <input type="text" name="team_communication_other" placeholder="Please specify...">
+          </div>
+          <span class="error-message">Please select an option</span>
+        </div>
+
+        <div class="nav-buttons">
+          <button type="button" class="btn-back" onclick="prevStep()">Back</button>
+          <button type="button" class="btn-next" onclick="nextStep()">Continue</button>
+        </div>
+      </div>
+
+      <!-- PAGE 7: Metrics & Data -->
+      <div class="step" data-step="7">
+        <div class="step-title">Metrics & Data</div>
+
+        <div class="form-group">
+          <label>How do you track your most important business metrics? <span style="color: #ef4444;">*</span></label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="metrics_tracking" value="Dashboard/Automated Reporting" required> Dashboard / Automated Reporting</label>
+            <label class="radio-label"><input type="radio" name="metrics_tracking" value="Spreadsheets"> Spreadsheets</label>
+            <label class="radio-label"><input type="radio" name="metrics_tracking" value="Manual Review"> Manual Review</label>
+            <label class="radio-label"><input type="radio" name="metrics_tracking" value="I do not currently track metrics"> I do not currently track metrics</label>
+          </div>
+          <span class="error-message">Please select an option</span>
+        </div>
+
+        <div class="form-group">
+          <label for="customer_data_usage">When was the last time you looked at customer data to make a business decision? <span style="color: #ef4444;">*</span></label>
+          <textarea id="customer_data_usage" name="customer_data_usage" required placeholder="e.g., Last month when we reviewed which services were most popular..."></textarea>
+          <span class="error-message">Please answer this question</span>
+        </div>
+
+        <div class="form-group">
+          <label for="lead_tracking_gaps">Do you lose track of leads or customers at any point in your process? Where does that usually happen? <span style="color: #ef4444;">*</span></label>
+          <textarea id="lead_tracking_gaps" name="lead_tracking_gaps" required placeholder="Describe where leads or customers tend to fall through the cracks..."></textarea>
+          <span class="error-message">Please answer this question</span>
+        </div>
+
+        <div class="form-group">
+          <label for="feedback_tracking">How do you handle customer feedback or satisfaction tracking? <span style="color: #ef4444;">*</span></label>
+          <textarea id="feedback_tracking" name="feedback_tracking" required placeholder="e.g., We send a follow-up email after each job, Google reviews..."></textarea>
+          <span class="error-message">Please answer this question</span>
+        </div>
+
+        <div class="nav-buttons">
+          <button type="button" class="btn-back" onclick="prevStep()">Back</button>
+          <button type="button" class="btn-next" onclick="nextStep()">Continue</button>
+        </div>
+      </div>
+
+      <!-- PAGE 8: Growth & AI Experience -->
+      <div class="step" data-step="8">
+        <div class="step-title">Growth & Technology</div>
+
+        <div class="form-group">
+          <label for="biggest_bottleneck">What is the biggest bottleneck stopping your business from growing right now? <span style="color: #ef4444;">*</span></label>
+          <textarea id="biggest_bottleneck" name="biggest_bottleneck" required placeholder="Describe what's holding your business back..."></textarea>
+          <span class="error-message">Please answer this question</span>
+        </div>
+
+        <div class="form-group">
+          <label for="tripled_leads_impact">If your lead volume tripled tomorrow, what part of your business would break first, and why? <span style="color: #ef4444;">*</span></label>
+          <textarea id="tripled_leads_impact" name="tripled_leads_impact" required placeholder="Describe which process or system would struggle most..."></textarea>
+          <span class="error-message">Please answer this question</span>
+        </div>
+
+        <div class="form-group">
+          <label>Have you tried any AI tools or automation before? <span style="color: #ef4444;">*</span></label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="ai_tools_experience" value="Yes" required> Yes</label>
+            <label class="radio-label"><input type="radio" name="ai_tools_experience" value="No"> No</label>
+          </div>
+          <div class="conditional-field" data-condition="ai_tools_experience" data-value="Yes">
+            <textarea name="ai_tools_description" placeholder="What worked and what didn't?"></textarea>
+          </div>
+          <span class="error-message">Please select an option</span>
+        </div>
+
+        <div class="form-group">
+          <label>How comfortable are you with adopting new technology in your business? <span style="color: #ef4444;">*</span></label>
+          <div class="range-container">
+            <span style="font-size: 0.8125rem; color: var(--text-secondary);">1</span>
+            <input type="range" name="tech_comfort" min="1" max="10" value="5" id="techComfort" oninput="document.getElementById('techComfortValue').textContent = this.value">
+            <span style="font-size: 0.8125rem; color: var(--text-secondary);">10</span>
+            <span class="range-value" id="techComfortValue">5</span>
+          </div>
+        </div>
+
+        <div class="nav-buttons">
+          <button type="button" class="btn-back" onclick="prevStep()">Back</button>
+          <button type="button" class="btn-next" onclick="nextStep()">Continue</button>
+        </div>
+      </div>
+
+      <!-- PAGE 9: Final Thoughts -->
+      <div class="step" data-step="9">
+        <div class="step-title">Final Thoughts</div>
+
+        <div class="form-group">
+          <label for="magic_wand_process">If you could wave a magic wand and fix one process in your business overnight, what would it be? <span style="color: #ef4444;">*</span></label>
+          <textarea id="magic_wand_process" name="magic_wand_process" required placeholder="Describe the one process that would make the biggest difference..."></textarea>
+          <span class="error-message">Please answer this question</span>
+        </div>
+
+        <div class="form-group">
+          <label for="successful_outcome">What would a successful outcome from this AI assessment look like for you? <span style="color: #ef4444;">*</span></label>
+          <textarea id="successful_outcome" name="successful_outcome" required placeholder="e.g., A clear roadmap for automating our top 3 bottlenecks..."></textarea>
+          <span class="error-message">Please answer this question</span>
+        </div>
+
+        <div class="form-group">
+          <label for="additional_info">Is there anything else about your business processes, challenges, or goals that did not get covered here that you would like to share?</label>
+          <textarea id="additional_info" name="additional_info" placeholder="Share anything else you think is relevant..."></textarea>
+        </div>
+
+        <div class="nav-buttons">
+          <button type="button" class="btn-back" onclick="prevStep()">Back</button>
+          <button type="submit" class="btn-submit" id="submitBtn">Submit Assessment</button>
+        </div>
+      </div>
+
+    </form>
+
+    <!-- Success State -->
+    <div class="success-state" id="successState">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 6L9 17l-5-5"/>
+        </svg>
+      </div>
+      <h2>Assessment Submitted!</h2>
+      <p>Thank you for completing the AI Efficiency Assessment. I'll review your responses and get back to you with personalized insights and recommendations.</p>
+    </div>
+
+  </main>
 
   <script>
-    // Tally embed script
-    (function() {
-      var script = document.createElement('script');
-      script.src = 'https://tally.so/widgets/embed.js';
-      script.async = true;
-      document.head.appendChild(script);
-    })();
+    const totalSteps = 9;
+    let currentStep = 1;
+
+    function updateProgress() {
+      document.getElementById('currentStep').textContent = currentStep;
+      document.getElementById('totalSteps').textContent = totalSteps;
+      const percentage = (currentStep / totalSteps) * 100;
+      document.getElementById('progressFill').style.width = percentage + '%';
+    }
+
+    function showStep(step) {
+      document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+      document.querySelector(`.step[data-step="${step}"]`).classList.add('active');
+      currentStep = step;
+      updateProgress();
+      window.scrollTo(0, 0);
+    }
+
+    function validateStep(step) {
+      const stepEl = document.querySelector(`.step[data-step="${step}"]`);
+      const requiredInputs = stepEl.querySelectorAll('[required]');
+      let isValid = true;
+
+      stepEl.querySelectorAll('.form-group').forEach(g => g.classList.remove('has-error'));
+
+      requiredInputs.forEach(input => {
+        const group = input.closest('.form-group');
+
+        if (input.type === 'radio') {
+          const name = input.name;
+          const checked = stepEl.querySelector(`input[name="${name}"]:checked`);
+          if (!checked) {
+            isValid = false;
+            if (group) group.classList.add('has-error');
+          } else {
+            if (group) group.classList.remove('has-error');
+          }
+        } else if (input.type === 'checkbox') {
+          const name = input.name;
+          const checked = stepEl.querySelectorAll(`input[name="${name}"]:checked`);
+          if (checked.length === 0) {
+            isValid = false;
+            if (group) group.classList.add('has-error');
+          } else {
+            if (group) group.classList.remove('has-error');
+          }
+        } else {
+          if (!input.value.trim()) {
+            isValid = false;
+            if (group) group.classList.add('has-error');
+          } else if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
+            isValid = false;
+            if (group) group.classList.add('has-error');
+          } else {
+            if (group) group.classList.remove('has-error');
+          }
+        }
+      });
+
+      return isValid;
+    }
+
+    function nextStep() {
+      if (validateStep(currentStep)) {
+        if (currentStep < totalSteps) {
+          showStep(currentStep + 1);
+        }
+      }
+    }
+
+    function prevStep() {
+      if (currentStep > 1) {
+        showStep(currentStep - 1);
+      }
+    }
+
+    // Conditional fields for radio buttons
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+      radio.addEventListener('change', function() {
+        const name = this.name;
+        const value = this.value;
+
+        document.querySelectorAll(`.conditional-field[data-condition="${name}"]`).forEach(field => {
+          if (field.dataset.value === value) {
+            field.classList.add('visible');
+          } else {
+            field.classList.remove('visible');
+          }
+        });
+      });
+    });
+
+    // Conditional field for paid ads checkbox
+    const noPaidAdsCheckbox = document.getElementById('noPaidAds');
+    const paidAdsTracking = document.getElementById('paidAdsTracking');
+
+    document.querySelectorAll('input[name="paid_ads"]').forEach(checkbox => {
+      checkbox.addEventListener('change', function() {
+        const noPaidAdsChecked = noPaidAdsCheckbox.checked;
+        const anyAdChecked = Array.from(document.querySelectorAll('input[name="paid_ads"]:checked'))
+          .some(cb => cb.value !== 'No Paid Ads');
+
+        if (noPaidAdsChecked || !anyAdChecked) {
+          paidAdsTracking.classList.remove('visible');
+        } else {
+          paidAdsTracking.classList.add('visible');
+        }
+      });
+    });
+
+    // Form submission
+    document.getElementById('assessmentForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      if (!validateStep(currentStep)) return;
+
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.textContent = 'Submitting...';
+      submitBtn.disabled = true;
+
+      const formData = new FormData(this);
+      const data = {};
+
+      // Handle regular fields
+      for (const [key, value] of formData.entries()) {
+        if (key === 'paid_ads') {
+          if (!data.paid_ads) data.paid_ads = [];
+          data.paid_ads.push(value);
+        } else {
+          data[key] = value;
+        }
+      }
+
+      data.submitted_at = new Date().toISOString();
+
+      try {
+        console.log('Submitting data:', data);
+        const response = await fetch('https://n8n.srv945929.hstgr.cloud/webhook/b7a8aea4-1e35-4d4f-8880-85b27c439ce0', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        console.log('Response status:', response.status);
+        console.log('Response ok:', response.ok);
+
+        if (response.ok) {
+          document.getElementById('assessmentForm').style.display = 'none';
+          document.querySelector('.progress-container').style.display = 'none';
+          document.querySelector('.assessment-header').style.display = 'none';
+          document.getElementById('successState').classList.add('active');
+        } else {
+          const errorText = await response.text();
+          console.error('Server responded with error:', response.status, errorText);
+          throw new Error(`Server error: ${response.status} - ${errorText}`);
+        }
+      } catch (error) {
+        console.error('Submission error:', error);
+        submitBtn.textContent = 'Submit Assessment';
+        submitBtn.disabled = false;
+        alert('Something went wrong. Please try again or email hi@joshstrohm.me directly.');
+      }
+    });
+
+    // Initialize
+    updateProgress();
   </script>
 </body>
 </html>
