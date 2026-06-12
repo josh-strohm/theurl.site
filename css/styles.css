@@ -125,6 +125,7 @@ body {
 }
 
 .brand-card {
+  position: relative;
   display: block;
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -133,6 +134,31 @@ body {
   text-decoration: none;
   color: inherit;
   transition: all 0.2s ease;
+}
+
+.brand-card .card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.brand-visit {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1;
+}
+
+.brand-visit:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .brand-card:hover {
