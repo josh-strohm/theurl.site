@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Websites by Strohm Partners LLC</title>
+  <meta name="description" content="AI-powered websites for local businesses from Strohm Partners LLC. Get a conversion-focused 4-page website with AI-written copy, custom visuals, lead capture, hosting, and support.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="strohmpartners-logo.png" type="image/png">
+  <meta property="og:image" content="https://theurl.site/strohmpartners-logo.png">
+  <meta name="twitter:image" content="https://theurl.site/strohmpartners-logo.png">
+  <style>
+    .offer-hero {
+      text-align: center;
+      margin-bottom: 48px;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    .offer-kicker {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .offer-hero h1 {
+      font-size: clamp(1.75rem, 6vw, 2.5rem);
+      line-height: 1.15;
+      letter-spacing: -0.04em;
+      margin-bottom: 16px;
+    }
+
+    .offer-hero p {
+      max-width: 560px;
+      margin: 0 auto;
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+    }
+
+    .offer-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 48px;
+    }
+
+    .offer-stat {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 12px;
+      text-align: center;
+    }
+
+    .offer-stat strong {
+      display: block;
+      font-size: 1.25rem;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .offer-stat span {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      line-height: 1.3;
+    }
+
+    .offer-section {
+      margin-bottom: 48px;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .section-copy {
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .problem-grid,
+    .package-grid,
+    .steps-grid,
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .detail-card,
+    .package-card,
+    .step-card,
+    .trust-card,
+    .faq-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .detail-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .detail-card h3,
+    .package-card h3,
+    .step-card h3,
+    .trust-card h3,
+    .faq-card h3 {
+      font-size: 0.9375rem;
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+
+    .detail-card p,
+    .package-card p,
+    .step-card p,
+    .trust-card p,
+    .faq-card p {
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .package-card {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .package-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      margin-bottom: 4px;
+    }
+
+    .package-icon svg {
+      width: 16px;
+      height: 16px;
+      color: var(--text-secondary);
+    }
+
+    .steps-grid {
+      counter-reset: steps;
+    }
+
+    .step-card {
+      position: relative;
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: var(--text);
+      color: var(--bg);
+      font-weight: 700;
+      font-size: 0.75rem;
+      margin-bottom: 12px;
+    }
+
+    .pricing-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 48px;
+    }
+
+    .pricing-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .pricing-name {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .pricing-price {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .pricing-price strong {
+      display: block;
+      font-size: 1.5rem;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    .pricing-price span {
+      display: block;
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      margin-top: 4px;
+    }
+
+    .pricing-list {
+      display: grid;
+      gap: 10px;
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px;
+    }
+
+    .pricing-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+
+    .pricing-list li::before {
+      content: "✓";
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 48px;
+    }
+
+    .comparison-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .comparison-card strong {
+      display: block;
+      font-size: 0.875rem;
+      margin-bottom: 6px;
+    }
+
+    .comparison-card span {
+      color: var(--text-secondary);
+      font-size: 0.8125rem;
+      line-height: 1.45;
+    }
+
+    .trust-grid {
+      margin-bottom: 48px;
+    }
+
+    .trust-card blockquote {
+      margin: 0 0 16px;
+      color: var(--text);
+      font-size: 0.875rem;
+      line-height: 1.55;
+    }
+
+    .trust-card cite {
+      display: block;
+      color: var(--text-secondary);
+      font-style: normal;
+      font-size: 0.75rem;
+    }
+
+    .trust-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 48px;
+    }
+
+    .trust-badge {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 48px;
+    }
+
+    .cta-panel {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .cta-panel h2 {
+      font-size: 1.125rem;
+      margin-bottom: 8px;
+    }
+
+    .cta-panel p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin-bottom: 16px;
+    }
+
+    .primary-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: var(--text);
+      color: var(--bg);
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .primary-link:hover {
+      transform: translateY(-1px);
+      background: #ffffff;
+    }
+
+    .primary-link svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    @media (max-width: 640px) {
+      .offer-stats,
+      .problem-grid,
+      .package-grid,
+      .steps-grid,
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-top {
+        flex-direction: column;
+      }
+
+      .pricing-price {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <a href="index.html" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M19 12H5m7-7l-7 7 7 7"/></svg>
+      Back to home
+    </a>
+
+    <section class="offer-hero">
+      <div class="hero-avatar">
+        <img src="strohmpartners-logo.png" alt="Strohm Partners LLC" class="avatar-img">
+      </div>
+      <p class="offer-kicker">AI Websites by Strohm Partners LLC</p>
+      <h1>Turn your website into a 24/7 lead generator.</h1>
+      <p>Get a polished, conversion-focused website with AI-written copy, custom visuals, and automated lead follow-up — built in 48 hours for $500 setup + $49/month hosting.</p>
+    </section>
+
+    <section class="offer-stats" aria-label="Offer highlights">
+      <div class="offer-stat">
+        <strong>48 hrs</strong>
+        <span>typical launch</span>
+      </div>
+      <div class="offer-stat">
+        <strong>$500</strong>
+        <span>one-time setup</span>
+      </div>
+      <div class="offer-stat">
+        <strong>$49/mo</strong>
+        <span>hosting included</span>
+      </div>
+    </section>
+
+    <section class="offer-section">
+      <p class="section-label">Local Service Website</p>
+      <h2 class="section-title">Book more jobs without chasing leads.</h2>
+      <p class="section-copy">A complete done-for-you website package designed for local service businesses that need leads, clarity, and speed.</p>
+      <a href="calendar.html" class="primary-link">
+        Let's Talk
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+      </a>
+    </section>
+
+    <section class="offer-section">
+      <p class="section-label">The problem</p>
+      <h2 class="section-title">Most local business websites quietly lose money.</h2>
+      <p class="section-copy">They look dated, send forms into nowhere, and leave owners stuck doing technical work instead of serving customers.</p>
+
+      <div class="problem-grid">
+        <article class="detail-card">
+          <span class="detail-number">01</span>
+          <h3>Outdated first impression</h3>
+          <p>Your website should build trust before a customer ever calls.</p>
+        </article>
+        <article class="detail-card">
+          <span class="detail-number">02</span>
+          <h3>Missed leads</h3>
+          <p>Forms, calls, and inquiries need instant follow-up to convert.</p>
+        </article>
+        <article class="detail-card">
+          <span class="detail-number">03</span>
+          <h3>Weak messaging</h3>
+          <p>Generic copy makes it hard for customers to understand why they should choose you.</p>
+        </article>
+        <article class="detail-card">
+          <span class="detail-number">04</span>
+          <h3>Too much upkeep</h3>
+          <p>Hosting, updates, security, and edits should not become your second job.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="offer-section">
+      <p class="section-label">The package</p>
+      <h2 class="section-title">Everything you need to launch a better website.</h2>
+
+      <div class="package-grid">
+        <article class="package-card">
+          <div class="package-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M9 3v18"/><path d="M15 9h.01"/><path d="M15 13h.01"/><path d="M15 17h.01"/></svg>
+          </div>
+          <h3>4-page professional website</h3>
+          <p>Home, Services, About, and Contact pages built around your offer.</p>
+        </article>
+        <article class="package-card">
+          <div class="package-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-10 10L2 15l3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><path d="M11 3c0 0 2.5 1.5 4 3"/></svg>
+          </div>
+          <h3>AI-generated copy</h3>
+          <p>Clear, persuasive messaging written specifically for your business.</p>
+        </article>
+        <article class="package-card">
+          <div class="package-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg>
+          </div>
+          <h3>AI-enhanced visuals</h3>
+          <p>Custom images and design direction that match your brand.</p>
+        </article>
+        <article class="package-card">
+          <div class="package-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+          </div>
+          <h3>Smart lead capture</h3>
+          <p>Forms and follow-up workflows so inquiries do not slip through the cracks.</p>
+        </article>
+        <article class="package-card">
+          <div class="package-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+          </div>
+          <h3>Fast, mobile-friendly design</h3>
+          <p>Responsive pages that look sharp on phones, tablets, and desktops.</p>
+        </article>
+        <article class="package-card">
+          <div class="package-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <h3>48-hour delivery</h3>
+          <p>From intake to launch, the process is fast and handled for you.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="offer-section">
+      <p class="section-label">How it works</p>
+      <h2 class="section-title">Three simple steps from idea to launch.</h2>
+
+      <div class="steps-grid">
+        <article class="step-card">
+          <span class="step-number">1</span>
+          <h3>Tell us about your business</h3>
+          <p>Share your services, customers, goals, and any brand details you already have.</p>
+        </article>
+        <article class="step-card">
+          <span class="step-number">2</span>
+          <h3>We build the site</h3>
+          <p>We create the pages, copy, visuals, forms, and lead workflows in 48 hours.</p>
+        </article>
+        <article class="step-card">
+          <span class="step-number">3</span>
+          <h3>Launch and learn</h3>
+          <p>You get a live website, simple access, and guidance on how to use it.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="offer-section">
+      <div class="pricing-card">
+        <div class="pricing-top">
+          <div>
+            <div class="pricing-name">Starter package</div>
+            <p class="section-copy" style="margin-bottom: 0;">Professional website package without agency pricing.</p>
+          </div>
+          <div class="pricing-price">
+            <strong>$500 setup + $49/mo</strong>
+            <span>Hosting included</span>
+          </div>
+        </div>
+
+        <ul class="pricing-list">
+          <li>4-page professional website</li>
+          <li>AI-generated copy and visuals</li>
+          <li>Lead capture and follow-up system</li>
+          <li>Mobile optimization and fast loading</li>
+          <li>Hosting, security, and updates</li>
+        </ul>
+
+        <a href="contact.html" class="primary-link">
+          Start my website
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <p class="section-label">Compared to other options</p>
+
+      <div class="comparison-grid">
+        <article class="comparison-card">
+          <strong>Traditional web design</strong>
+          <span>$1,500–$5,000+ upfront</span>
+        </article>
+        <article class="comparison-card">
+          <strong>Monthly website builders</strong>
+          <span>$20–$50/month forever</span>
+        </article>
+        <article class="comparison-card">
+          <strong>DIY builders</strong>
+          <span>10+ hours and a learning curve</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="offer-section">
+      <p class="section-label">FAQ</p>
+      <h2 class="section-title">Questions before we build?</h2>
+
+      <div class="faq-list">
+        <article class="faq-card">
+          <h3>Do I need to provide my own domain?</h3>
+          <p>No. We can use a free subdomain or help connect an existing domain.</p>
+        </article>
+        <article class="faq-card">
+          <h3>What if I do not like the AI-generated content?</h3>
+          <p>You get two rounds of revisions included so the messaging fits your business.</p>
+        </article>
+        <article class="faq-card">
+          <h3>Is my data secure with the automation?</h3>
+          <p>Yes. The automation runs on your self-hosted instance with access provided to you.</p>
+        </article>
+        <article class="faq-card">
+          <h3>What types of businesses do you work best with?</h3>
+          <p>Local service businesses such as health and wellness, home services, professional services, and contractors.</p>
+        </article>
+        <article class="faq-card">
+          <h3>How is this different from Wix or Squarespace?</h3>
+          <p>We build it for you using AI and automation, and the lead system is included.</p>
+        </article>
+        <article class="faq-card">
+          <h3>What does the $49/month hosting cover?</h3>
+          <p>Hosting, security updates, technical support, and performance optimization.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="cta-panel">
+      <h2>Ready to get a better website?</h2>
+      <p>Request a quote and we’ll help you decide if the AI Websites package is the right fit.</p>
+      <a href="contact.html" class="primary-link">
+        Request a quote
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+      </a>
+    </section>
+
+    <div class="email-link">
+      Questions? Reach out at <a href="mailto:hi@joshstrohm.com">hi@joshstrohm.com</a>
+    </div>
+
+    <footer class="footer">
+      <p>&copy; 2026 Strohm Partners LLC. All rights reserved.</p>
+    </footer>
+  </main>
+
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+  <style>
+    :root {
+      --chat--color--primary: #22d3ee;
+      --chat--color--primary-shade-50: #67e8f9;
+      --chat--color--primary--shade-100: #06b6d4;
+      --chat--color--secondary: #f97316;
+      --chat--color--white: #1e1e2e;
+      --chat--color--light: #1e1e2e;
+      --chat--color--light-shade-50: #2a2a3a;
+      --chat--color--light-shade-100: #333340;
+      --chat--color--medium: #2a2a3a;
+      --chat--color--dark: #0a0a0a;
+      --chat--color--typing: #67e8f9;
+      --chat--toggle--background: #22d3ee;
+      --chat--toggle--hover--background: #67e8f9;
+      --chat--toggle--active--background: #06b6d4;
+      --chat--toggle--color: #0a0a0a;
+      --chat--header--background: #0a0a0a;
+      --chat--header--color: #ffffff;
+      --chat--body--background: #141414;
+      --chat--footer--background: #141414;
+      --chat--footer--color: #f8fafc;
+      --chat--input--background: #1e1e2e;
+      --chat--input--text-color: #f8fafc;
+      --chat--input--border: #2a2a3a;
+      --chat--message--bot--background: #1e1e2e;
+      --chat--message--bot--color: #f8fafc;
+      --chat--message--user--background: #22d3ee;
+      --chat--message--user--color: #0a0a0a;
+      --chat--input--send--button--background: #22d3ee;
+      --chat--input--send--button--color: #0a0a0a;
+      --chat--input--send--button--background-hover: #67e8f9;
+      --chat--input--file--button--background: #1e1e2e;
+      --chat--input--file--button--color: #f8fafc;
+      --chat--button--background--primary: #22d3ee;
+      --chat--button--color--primary: #0a0a0a;
+      --chat--window--border: 1px solid #2a2a3a;
+      --chat--border-radius: 12px;
+    }
+  </style>
+  <style>
+    button[class*="toggle"],
+    div[class*="toggle"] button,
+    [class*="chat-toggle"] button,
+    #n8n-chat > div > button,
+    .n8n-chat-toggle {
+      background-color: #22d3ee !important;
+    }
+    #n8n-chat .chat-window,
+    #n8n-chat .chat-body,
+    #n8n-chat .chat-footer,
+    #n8n-chat .chat-header,
+    #n8n-chat .chat-messages,
+    .chat-window,
+    .chat-body,
+    .chat-footer,
+    .chat-header,
+    .chat-messages {
+      background-color: #141414 !important;
+      color: #f8fafc !important;
+    }
+    .chat-window div,
+    .chat-window span,
+    .chat-window p,
+    .chat-body div,
+    .chat-messages div {
+      background-color: inherit !important;
+    }
+    .chat-message[class*="user"],
+    [class*="user-message"],
+    [class*="chat-user"],
+    [class*="message-user"] {
+      background-color: #22d3ee !important;
+      color: #0a0a0a !important;
+    }
+    .chat-message[class*="user"] span,
+    .chat-message[class*="user"] p,
+    [class*="user-message"] span,
+    [class*="user-message"] p {
+      color: #0a0a0a !important;
+    }
+    .chat-input,
+    [class*="input"],
+    [class*="textarea"] {
+      background-color: #1e1e2e !important;
+      color: #f8fafc !important;
+    }
+    [class*="typing"],
+    [class*="typing-indicator"],
+    [class*="typing-dots"] {
+      background-color: #1e1e2e !important;
+    }
+    [class*="typing"] span,
+    [class*="typing-indicator"] span {
+      background-color: #67e8f9 !important;
+    }
+  </style>
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+    createChat({
+      webhookUrl: 'https://n8n.strohmpartners.com/webhook/600617eb-7e53-4546-83e2-88a3f7af7ac1/chat',
+      initialMessages: [
+        "Hi, I'm Josh's AI assistant. Interested in an AI-powered website? How can I help?"
+      ],
+      i18n: {
+        en: {
+          title: "Strohm Partners AI Assistant",
+          subtitle: "Always ready to help!",
+          footer: '',
+          getStarted: 'New Conversation',
+          inputPlaceholder: 'Type your message...',
+        },
+      },
+    });
+  </script>
+</body>
+</html>
+
